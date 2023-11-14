@@ -23,7 +23,7 @@ export default class Index extends Component {
         NavigationUtil.login({navigation});
       }
     }, 200);
-  }
+  } 
   render() {
     return (
       <View style={styles.container}>

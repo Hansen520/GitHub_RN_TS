@@ -57,6 +57,7 @@ const TABS = {
   },
 };
 
+// 底部导航
 export default class DynamicTabNavigator extends Component {
   _tabNavigator() {
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS;

@@ -8,7 +8,7 @@ import NavigationBar from 'react-native-navbar-plus';
 export default class Index extends Component {
     render() {
         let navigationBar = <NavigationBar
-            title={'最热'}
+            title={'最热门'}
         />
         const TabNavigator = keys.length ?
             tabNav({ Component: PopularTab, theme: { themeColor: '#2196f3' }, keys }) : null;

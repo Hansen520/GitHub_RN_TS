@@ -12,7 +12,7 @@ export default class Index extends Component {
     render() {
         //方便其他页面跳转的时候不传navigation
         NavigationUtil.navigation = this.props.navigation;
-        return <SafeAreaViewPlus topColor="#2196f3">
+        return <SafeAreaViewPlus topColor="#21c9f3">
             <DynamicTabNavigator />
         </SafeAreaViewPlus>
 

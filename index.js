@@ -8,14 +8,14 @@
 
 import {AppRegistry} from 'react-native';
 import App from './App';
-import FetchDemoPage from './js/FetchDemoPage';
-import AsyncStorageDemoPage from './js/AsyncStorageDemoPage';
-import LoginPage from './page/LoginPage';
-import RegisterPage from './page/RegisterPage';
+import FetchDemoPage from './src/js/FetchDemoPage';
+import AsyncStorageDemoPage from './src/js/AsyncStorageDemoPage';
+import LoginPage from './src/page/LoginPage';
+import RegisterPage from './src/page/RegisterPage';
 import {name as appName} from './app.json';
-import AppNavigators from './js/navigator/AppNavigators';
-import NavigationDemoPage from './page/NavigationDemoPage';
-import HomePage from './page/HomePage';
+import AppNavigators from './src/js/navigator/AppNavigators';
+import NavigationDemoPage from './src/page/NavigationDemoPage';
+import HomePage from './src/page/HomePage';
 
 
 AppRegistry.registerComponent(appName, () => AppNavigators);
