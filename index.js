@@ -13,5 +13,9 @@ import AsyncStorageDemoPage from './js/AsyncStorageDemoPage';
 import LoginPage from './page/LoginPage';
 import RegisterPage from './page/RegisterPage';
 import {name as appName} from './app.json';
+import AppNavigators from './js/navigator/AppNavigators';
+import NavigationDemoPage from './page/NavigationDemoPage';
+import HomePage from './page/HomePage';
 
-AppRegistry.registerComponent(appName, () => LoginPage);
+
+AppRegistry.registerComponent(appName, () => AppNavigators);
