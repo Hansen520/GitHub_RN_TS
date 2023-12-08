@@ -4,10 +4,11 @@
  */
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 const Tab = createMaterialTopTabNavigator();
 
-export function tabNav({ Component, keys, theme, extra = {} = {} }) {
+export function tabNav({ Component, keys, theme, extra = {} = {} }: any) {
+    console.log(Component, 11);
     /* 首部滑动导航展示 */
     return (<Tab.Navigator
         screenOptions={{
@@ -24,12 +25,13 @@ export function tabNav({ Component, keys, theme, extra = {} = {} }) {
         }}
     >
         {Object.entries(_genTabs({ Component, keys, theme, extra })).map(
-            (item) => {
+            (item: any) => {
+                console.log(item, 28);
                 return (
                     <Tab.Screen
                         key={item[0]}
-                        name={item[0]}
-                        component={item[1].screen}
+                        name={item[0]} // name
+                        component={item[1].Screen} // body
                         options={item[1].navigationOptions}
                     />
                 )
@@ -39,13 +41,15 @@ export function tabNav({ Component, keys, theme, extra = {} = {} }) {
 
 }
 
-function _genTabs({ Component, keys, theme, extra = {} = {} }) {
-    const tabs = {};
-    keys.forEach((item, index) => {
+/* 生成tab导航 */
+function _genTabs({ Component, keys, theme, extra = {} = {} }: any) {
+    const tabs: any = {};
+    console.log(Component, 46);
+    keys.forEach((item: any, index: number) => {
         if (item.checked) {
             tabs[`tab${index}`] = {
                 //初始化Component时携带默认参数 @https://github.com/react-navigation/react-navigation/issues/2392
-                screen: (props) => (<Component {...props} {...extra} tabLabel={item.name} theme={theme} />),
+                Screen: (props: any) => (<Component {...props} {...extra} tabLabel={item.name} theme={theme} />),
                 navigationOptions: {
                     title: item.name,
                 }

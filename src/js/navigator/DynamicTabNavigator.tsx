@@ -20,7 +20,7 @@ const TABS = {
     navigationOptions: {
       tabBarLabel: '最热',
       headerShown: false,
-      tabBarIcon: ({color, focused}) => (
+      tabBarIcon: ({color, focused}: any) => (
         <MaterialIcons name={'whatshot'} size={26} style={{color: color}} />
       ),
     },
@@ -30,7 +30,7 @@ const TABS = {
     navigationOptions: {
       tabBarLabel: '趋势',
       headerShown: false,
-      tabBarIcon: ({color, focused}) => (
+      tabBarIcon: ({color, focused}: any) => (
         <Ionicons name={'md-trending-up'} size={26} style={{color: color}} />
       ),
     },
@@ -40,7 +40,7 @@ const TABS = {
     navigationOptions: {
       tabBarLabel: '收藏',
       headerShown: false,
-      tabBarIcon: ({color, focused}) => (
+      tabBarIcon: ({color, focused}: any) => (
         <MaterialIcons name={'favorite'} size={26} style={{color: color}} />
       ),
     },
@@ -50,7 +50,7 @@ const TABS = {
     navigationOptions: {
       tabBarLabel: '我的',
       headerShown: false,
-      tabBarIcon: ({color, focused}) => (
+      tabBarIcon: ({color, focused}: any) => (
         <Entypo name={'user'} size={26} style={{color: color}} />
       ),
     },

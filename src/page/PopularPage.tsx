@@ -21,8 +21,10 @@ export default class Index extends Component {
     }
 }
 class PopularTab extends Component {
+    
     render() {
         const { tabLabel } = this.props;
+        console.log(tabLabel, 27);
         return (<Text>{tabLabel}</Text>)
     }
 }

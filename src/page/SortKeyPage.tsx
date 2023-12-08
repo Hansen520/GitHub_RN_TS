@@ -1,7 +1,3 @@
-/*
- * @Date: 2023-11-13 17:34:35
- * @Description: description
- */
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, View
@@ -10,7 +6,7 @@ export default class Index extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>最热</Text>
+                <Text>最热1</Text>
             </View>
         );
     }
