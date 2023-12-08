@@ -5,10 +5,10 @@
 import React, {useState} from 'react';
 import {Linking, SafeAreaView, StyleSheet, View} from 'react-native';
 import {ConfirmButton, Input, NavBar, Tips} from '../common/LoginComponent';
-import Constants from '../js/expand/dao/Constants';
-import LoginDao from '../js/expand/dao/LoginDao';
+import Constants from '../js/expand/Constants';
+import LoginDao from '../js/expand/LoginDao';
 
-export default (props: any) => {
+export default () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [imoocId, setIMoocId] = useState('');

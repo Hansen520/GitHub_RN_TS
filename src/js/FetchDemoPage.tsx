@@ -10,8 +10,8 @@ import {
   View,
   Text,
 } from 'react-native';
-import {get, post} from './expand/dao/HiNet';
-import Constants from './expand/dao/Constants';
+import {get, post} from './expand/HiNet';
+import Constants from './expand/Constants';
 
 export default (props: any) => {
   const [msg, setMsg] = useState('');

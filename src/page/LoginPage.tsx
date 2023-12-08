@@ -5,8 +5,8 @@
 import React, {useState} from 'react';
 import {Linking, SafeAreaView, StyleSheet, View} from 'react-native';
 import {ConfirmButton, Input, NavBar, Tips} from '../common/LoginComponent';
-import Constants from '../js/expand/dao/Constants';
-import LoginDao from '../js/expand/dao/LoginDao';
+import Constants from '../js/expand/Constants';
+import LoginDao from '../js/expand/LoginDao';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // import LoginDao from '../expand/dao/LoginDao';
 
@@ -62,7 +62,6 @@ export default (props: any) => {
         />
         <ConfirmButton title="登录" onClick={onLogin} />
         <Tips msg={msg} helpUrl={helpUrl} />
-        <Ionicons name={'md-trending-up'} size={26} style={{ color: '#ff0000' }} />
       </View>
     </SafeAreaView>
   );
