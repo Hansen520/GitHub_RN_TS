@@ -1,3 +1,7 @@
+/*
+ * @Date: 2023-11-13 17:38:39
+ * @Description: description
+ */
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, View

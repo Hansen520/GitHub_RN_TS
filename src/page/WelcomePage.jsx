@@ -28,7 +28,7 @@ export default class Index extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>4334</Text>
+        <Text>loading...</Text>
       </View>
     );
   }

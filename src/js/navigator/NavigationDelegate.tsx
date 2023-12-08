@@ -44,7 +44,6 @@ export function tabNav({ Component, keys, theme, extra = {} = {} }: any) {
 /* 生成tab导航 */
 function _genTabs({ Component, keys, theme, extra = {} = {} }: any) {
     const tabs: any = {};
-    console.log(Component, 46);
     keys.forEach((item: any, index: number) => {
         if (item.checked) {
             tabs[`tab${index}`] = {

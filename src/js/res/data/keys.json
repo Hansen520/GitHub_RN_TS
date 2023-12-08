@@ -23,7 +23,7 @@
     {
       "path": "AngularJS",
       "name": "AngularJS",
-      "checked": false
+      "checked": true
     },
     {
       "path": "jQuery",
