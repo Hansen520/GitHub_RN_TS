@@ -3,8 +3,8 @@
  * @Description: description
  */
 import React, {Component} from 'react';
-import NavigationUtil from '../js/navigator/NavigationUtil';
-import {getBoarding} from '../js/util/BoardingUtil';
+import NavigationUtil from '../navigator/NavigationUtil';
+import {getBoarding} from '../util/BoardingUtil';
 import {StyleSheet, Text, View} from 'react-native';
 export default class Index extends Component {
 

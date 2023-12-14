@@ -26,7 +26,6 @@ export function tabNav({ Component, keys, theme, extra = {} = {} }: any) {
     >
         {Object.entries(_genTabs({ Component, keys, theme, extra })).map(
             (item: any) => {
-                console.log(item, 28);
                 return (
                     <Tab.Screen
                         key={item[0]}

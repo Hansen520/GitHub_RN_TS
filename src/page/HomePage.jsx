@@ -4,8 +4,8 @@
  */
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import NavigationUtil from '../js/navigator/NavigationUtil';
-import DynamicTabNavigator from '../js/navigator/DynamicTabNavigator';
+import NavigationUtil from '../navigator/NavigationUtil';
+import DynamicTabNavigator from '../navigator/DynamicTabNavigator';
 import SafeAreaViewPlus from 'react-native-safe-area-plus';
 
 export default class Index extends Component {

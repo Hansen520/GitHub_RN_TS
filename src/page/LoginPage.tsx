@@ -5,8 +5,8 @@
 import React, {useState} from 'react';
 import {Linking, SafeAreaView, StyleSheet, View} from 'react-native';
 import {ConfirmButton, Input, NavBar, Tips} from '../common/LoginComponent';
-import Constants from '../js/expand/Constants';
-import LoginDao from '../js/expand/LoginDao';
+import Constants from '../expand/Constants';
+import LoginDao from '../expand/LoginDao';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // import LoginDao from '../expand/dao/LoginDao';
 

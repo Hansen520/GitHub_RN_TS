@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import {
     StyleSheet, Text, View
 } from 'react-native';
-import { tabNav } from '../js/navigator/NavigationDelegate';
-import keys from '../js/res/data/keys.json';
+import { tabNav } from '../navigator/NavigationDelegate';
+import keys from '../data/keys.json';
 import NavigationBar from 'react-native-navbar-plus';
 export default class Index extends Component {
     render() {
