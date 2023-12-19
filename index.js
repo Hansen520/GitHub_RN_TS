@@ -18,4 +18,4 @@ import NavigationDemoPage from './src/page/NavigationDemoPage';
 import HomePage from './src/page/HomePage';
 
 
-AppRegistry.registerComponent(appName, () => AppNavigators);
+AppRegistry.registerComponent(appName, () => App);

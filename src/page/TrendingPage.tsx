@@ -10,7 +10,7 @@ export default class Index extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>最热1</Text>
+                <Text>最热12</Text>
             </View>
         );
     }

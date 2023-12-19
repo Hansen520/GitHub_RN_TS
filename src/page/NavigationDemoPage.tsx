@@ -92,7 +92,7 @@ function MainScreen() {
 }
 
 
-function WelcomePage(props) {
+function WelcomePage(props: any) {
   const { navigation } = props;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

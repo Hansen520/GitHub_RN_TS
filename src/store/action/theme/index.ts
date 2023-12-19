@@ -10,5 +10,6 @@ import Types from '../types';
  * @returns {{type: string, theme: *}}
  */
 export function onThemeChange(theme: string) {
+  console.log('onThemeChange', { type: Types.THEME_CHANGE, theme: theme });
   return { type: Types.THEME_CHANGE, theme: theme };
 }

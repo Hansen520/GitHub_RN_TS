@@ -1,12 +1,12 @@
+/*
+ * @Date: 2023-12-08 11:15:49
+ * @Description: description
+ */
 import React from 'react';
-import {} from 'redux';
+import { combineReducers } from 'redux';
+import theme from './theme';
 
-function Reducer() {
-  return (
-    <div>
-      Reducer
-    </div>
-  );
-}
-
-export default Reducer;
+const index = combineReducers({
+  theme: theme
+})
+export default index;

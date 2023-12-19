@@ -1,3 +1,7 @@
+/*
+ * @Date: 2023-11-13 17:38:51
+ * @Description: description
+ */
 
 import React, { Component } from 'react';
 import {
@@ -7,7 +11,7 @@ export default class Index extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>最热1</Text>
+                <Text>最热13</Text>
             </View>
         );
     }

@@ -8,7 +8,6 @@ import { StyleSheet, View, Text, Button } from "react-native";
 const Tab = createMaterialTopTabNavigator();
 
 export function tabNav({ Component, keys, theme, extra = {} = {} }: any) {
-    console.log(Component, 11);
     /* 首部滑动导航展示 */
     return (<Tab.Navigator
         screenOptions={{

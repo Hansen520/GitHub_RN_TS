@@ -7,7 +7,6 @@ import NavigationUtil from '../navigator/NavigationUtil';
 import {getBoarding} from '../util/BoardingUtil';
 import {StyleSheet, Text, View} from 'react-native';
 export default class Index extends Component {
-
   componentDidMount() {
     this.doLaunch();
   }
