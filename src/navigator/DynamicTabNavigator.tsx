@@ -64,7 +64,6 @@ class DynamicTabNavigator extends Component {
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS;
     const tabs = {PopularPage, TrendingPage, FavoritePage, MyPage}; //根据需要定制显示的tab
     const themeColor = this.props.theme.themeColor || this.props.theme;
-    console.log(themeColor, 666);
     return (
       <Tab.Navigator>
         {Object.entries(tabs).map(item => {
