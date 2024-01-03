@@ -14,7 +14,6 @@ const logger = (store: any) => (next: any) => (action: any) => {
         console.log('dispatching ', action);
     }
     const result = next(action);
-    console.log('nextState119', store.getState());
     return result;
 };
 // 设置中间件

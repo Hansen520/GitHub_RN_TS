@@ -2,53 +2,61 @@
  * @Date: 2023-11-10 15:11:24
  * @Description: description
  */
+import NavigationUtil from '../navigator/NavigationUtil';
+import {getBoarding} from '../util/BoardingUtil';
 import Constants from './Constants';
 
 export const get = (api: string) => {
   return async (params?: {}) => {
+    const boarding = await getBoarding();
     const {headers, url} = Constants;
-    return handleData(fetch(buildParams(url + api, params), {
+    return handleData(
+      fetch(buildParams(url + api, params), {
         headers: {
-            ...headers
-        }
-    }));
+          ...headers,
+          'boarding-pass': boarding || '',
+        },
+      }),
+    );
   };
 };
 
-export const post = (api: string) => {
-    /**
-     * 第一个参数作为body参数，第二个参数作为URL path或者查询参数
-     */
-    return (params: {}) => {
-        return async (queryParams?: {} | string) => {
-            const { headers, url } = Constants;
-            var data, cType;
-            if (params instanceof FormData) {
-                data = params;
-                cType = 'multipart/form-data';// fix TypeError: Network request failed
-            } else {
-                data = JSON.stringify(params);
-                cType = 'application/json';
-            }
-            return handleData(fetch(buildParams(url + api, queryParams),
-                {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'content-type': cType,
-                        ...headers,
-                    }
-                }
-            ))
-        }
-    }
+export function post(api: string) {
+  /**
+   * 第一个参数作为body参数，第二个参数作为URL path或者查询参数
+   */
+  return (params: {}) => {
+    return async (queryParams?: {} | string) => {
+      const boarding = await getBoarding();
+      const {headers, url} = Constants;
+      let data, cType;
+      if (params instanceof FormData) {
+        data = params;
+        cType = 'multipart/form-data'; // fix TypeError: Network request failed
+      } else {
+        data = JSON.stringify(params);
+        cType = 'application/json';
+      }
+      return handleData(
+        fetch(buildParams(url + api, queryParams), {
+          method: 'POST',
+          body: data,
+          headers: {
+            'content-type': cType,
+            ...headers,
+            'boarding-pass': boarding || '',
+          },
+        }),
+      );
+    };
+  };
 }
 
 /**
  * 处理接口返回数据
  * @param doAction
  */
-const handleData = (doAction: Promise<any>) => {
+function handleData(doAction: Promise<any>) {
   return new Promise((resolve, reject) => {
     doAction
       .then(res => {
@@ -65,7 +73,8 @@ const handleData = (doAction: Promise<any>) => {
         }
         const {code, msg, data: {list = undefined} = {}} = result;
         if (code === 401) {
-          // todo
+          //跳转到登录页
+          NavigationUtil.login();
           return;
         }
         resolve(list || result);
@@ -74,26 +83,28 @@ const handleData = (doAction: Promise<any>) => {
         reject(error);
       });
   });
-};
+}
 
 /**
  * 构建url参数
  * @param url 路径
  * @param params 参数
- * @returns 
+ * @returns
  */
-const buildParams = (url: string, params?: {} | string): string => {
-    let newUrl = new URL(url), finalUrl;
-    if (typeof params === 'object') { // formData
-        for (const [key, value] of Object.entries(params)) {
-            newUrl.searchParams.append(key, value as string);
-        }
-        finalUrl = newUrl.toString();
-    } else if(typeof params === 'string') { // string
-        finalUrl = url.endsWith('/') ? url + params : url + '/' + params
-    } else { // 其他
-        finalUrl = newUrl.toString();
+function buildParams(url: string, params?: {} | string): string {
+  let newUrl = new URL(url),
+    finalUrl;
+  if (typeof params === 'object') {
+    for (const [key, value] of Object.entries(params)) {
+      newUrl.searchParams.append(key, value as string);
     }
-    console.log('---buildParams----:', finalUrl);
-    return finalUrl;
+    finalUrl = newUrl.toString();
+  } else if (typeof params === 'string') {
+    //适配path参数
+    finalUrl = url.endsWith('/') ? url + params : url + '/' + params;
+  } else {
+    finalUrl = newUrl.toString();
+  }
+  console.log('---buildParams----:', finalUrl);
+  return finalUrl;
 }

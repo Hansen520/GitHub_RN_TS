@@ -3,9 +3,12 @@
  * @Description: description
  */
 import { onThemeChange } from './theme';
+import { onRefreshPopular, onLoadMorePopular } from './popular/index';
 /*
 * action聚合
 */
 export default {
-  onThemeChange
+  onThemeChange,
+  onRefreshPopular,
+  onLoadMorePopular
 };

@@ -23,7 +23,6 @@ export default (props: any) => {
     try {
       const value = await AsyncStorage.getItem(KEY);
       setShowText(value || '');
-      console.log(value);
     } catch (error) {
       console.log(error);
     }
