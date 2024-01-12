@@ -23,7 +23,6 @@ const defaultState: any = {};
  * @returns {{theme: (onAction|*|string)}}
  */
 export default function onAction(state = defaultState, action: any) {
-    console.log(action.type, 26);
     switch (action.type) {
         case Types.POPULAR_REFRESH_SUCCESS://下拉刷新成功
             return {

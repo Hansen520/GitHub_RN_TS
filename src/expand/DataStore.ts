@@ -31,6 +31,9 @@ export default class DataStore {
       const q = new URL(url).searchParams.get('q');
       params.q = q;
     };
+    // get(api)(params).then(res => {
+    //   console.log(res, 35);
+    // })
     return get(api)(params);
   }
 }

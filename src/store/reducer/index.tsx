@@ -5,10 +5,13 @@
 import React from 'react';
 import { combineReducers } from 'redux';
 import theme from './theme';
-import popular from './popular'
+import popular from './popular';
+import trending from './trending'
+
 
 const index = combineReducers({
   theme: theme,
-  popular: popular
+  popular: popular,
+  trendingHansen: trending,
 })
 export default index;

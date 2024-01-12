@@ -4,11 +4,14 @@
  */
 import { onThemeChange } from './theme';
 import { onRefreshPopular, onLoadMorePopular } from './popular/index';
+import { onRefreshTrending, onLoadMoreTrending } from './trending/index';
 /*
 * action聚合
 */
 export default {
   onThemeChange,
   onRefreshPopular,
-  onLoadMorePopular
+  onLoadMorePopular,
+  onRefreshTrending,
+  onLoadMoreTrending
 };

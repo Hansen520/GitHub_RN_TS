@@ -34,5 +34,25 @@
       "path": "react",
       "name": "React",
       "checked": true
+    },
+    {
+      "path": "vue",
+      "name": "Vue",
+      "checked": true
+    },
+    {
+      "path": "electron",
+      "name": "electron",
+      "checked": true
+    },
+    {
+      "path": "nextJs",
+      "name": "Next",
+      "checked": true
+    },
+    {
+      "path": "front end interview",
+      "name": "interview",
+      "checked": true
     }
   ]

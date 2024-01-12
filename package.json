@@ -20,6 +20,7 @@
     "react-native": "0.72.6",
     "react-native-easy-toast": "^2.3.0",
     "react-native-gesture-handler": "^2.13.4",
+    "react-native-htmlview": "0.16.0",
     "react-native-isiphonex-device": "^2.5.0",
     "react-native-navbar-plus": "^2.6.1",
     "react-native-pager-view": "^6.2.2",

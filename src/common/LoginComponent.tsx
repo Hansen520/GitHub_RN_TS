@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   confirmLayout: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#e7912e',
     alignItems: 'center',
     padding: 12,
     margin: 20,

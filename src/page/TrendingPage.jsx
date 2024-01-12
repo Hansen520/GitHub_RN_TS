@@ -1,27 +1,19 @@
-/*
- * @Date: 2023-11-13 17:38:39
- * @Description: description
- */
-import React, {Component} from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  RefreshControl,
-} from 'react-native';
-import {tabNav} from '../navigator/NavigationDelegate';
-import keys from '../data/keys.json';
-import NavigationBar from 'react-native-navbar-plus';
-import {connect} from 'react-redux';
-import actions from '../store/action';
-import PopularItem from '../common/PopularItem';
+import React, { Component } from 'react';
+import { StyleSheet, ActivityIndicator, Text, View, FlatList, RefreshControl } from 'react-native';
+import { connect } from 'react-redux';
+import actions from '../store/action/index';
+import { tabNav } from '../navigator/NavigationDelegate';
+import NavigationUtil from '../navigator/NavigationUtil'
+import TrendingItem from '../common/TrendingItem'
 import Toast from 'react-native-easy-toast'
-const URL = 'https://api.github.com/search/repositories?q=';
-const QUERY_STR = '&sort=stars';
-const THEME_COLOR = 'red';
-class PopularPage extends Component {
+import NavigationBar from 'react-native-navbar-plus';
+import keys from '../data/langs.json';
+
+const URL = 'https://github.com/trending/';
+const QUERY_STR = '?since=daily';
+const THEME_COLOR = '#678';
+
+class TrendingPage extends Component {
   render() {
     const themeColor = this.props.theme.themeColor || this.props.theme;
     if (this.themeColor != themeColor) {//当主题变更的时候需要以新的主题色来创建TabNavigator
@@ -30,13 +22,13 @@ class PopularPage extends Component {
     }
     let navigationBar = (
       <NavigationBar
-        title={'最热'}
+        title={'趋势'}
         style={{ backgroundColor: themeColor }}//修改标题栏主题色
       />
     );
     this.TabNavigator = keys.length
       ? tabNav({
-          Component: PopularTabPage,
+          Component: TrendingTabPage,
           theme: {themeColor},
           keys,
         })
@@ -49,18 +41,17 @@ class PopularPage extends Component {
     );
   }
 }
-const mapPopularStateToProps = (state) => ({
+const mapTrendingStateToProps = (state) => ({
   theme: state.theme.theme,
 });
-export default connect(mapPopularStateToProps, null)(PopularPage);
-
+//注意：connect只是个function，并不应定非要放在export后面
+export default connect(mapTrendingStateToProps, null)(TrendingPage);
 
 const pageSize = 10;//设为常量，防止修改
-class PopularTab extends Component {
-
+class TrendingTab extends Component {
   constructor(props) {
     super(props);
-    const {tabLabel} = this.props;
+    const { tabLabel } = this.props;
     this.storeName = tabLabel;
   }
 
@@ -69,22 +60,26 @@ class PopularTab extends Component {
   }
 
   loadData(loadMore) {
-    const { onRefreshPopular, onLoadMorePopular } = this.props;
+    const { onRefreshTrending, onLoadMoreTrending } = this.props;
     const store = this._store();
     const url = this.genFetchUrl(this.storeName);
     if (loadMore) {
-      onLoadMorePopular(this.storeName, ++store.pageIndex, pageSize, store.items, callback => {
+      onLoadMoreTrending(this.storeName, ++store.pageIndex, pageSize, store.items, callback => {
         this.refs.toast.show('没有更多了');
       })
     } else {
-      onRefreshPopular(this.storeName, url, pageSize)
+      onRefreshTrending(this.storeName, url, pageSize)
     }
   }
 
-  /* 获取与当前页面有关的数据 */
+  /**
+   * 获取与当前页面有关的数据
+   * @returns {*}
+   * @private
+   */
   _store() {
-    const { popular } = this.props;
-    let store = popular[this.storeName];
+    const { trending } = this.props;
+    let store = trending[this.storeName];
     if (!store) {
       store = {
         items: [],
@@ -102,7 +97,7 @@ class PopularTab extends Component {
 
   renderItem(data) {
     const item = data.item;
-    return <PopularItem
+    return <TrendingItem
       item={item}
       onSelect={() => {
         NavigationUtil.goPage({
@@ -113,14 +108,14 @@ class PopularTab extends Component {
   }
 
   genIndicator() {
-    return this._store().hideLoadingMore ? null : (
+    return this._store().hideLoadingMore ? null :
       <View style={styles.indicatorContainer}>
-        <ActivityIndicator style={styles.indicator} />
+        <ActivityIndicator
+          style={styles.indicator}
+        />
         <Text>正在加载更多</Text>
       </View>
-    );
   }
-  
 
   render() {
     let store = this._store();
@@ -129,10 +124,10 @@ class PopularTab extends Component {
         <FlatList
           data={store.projectModes}
           renderItem={data => this.renderItem(data)}
-          keyExtractor={item => '' + item.id}
+          keyExtractor={item => "" + item.id}
           refreshControl={
             <RefreshControl
-              title="Loading"
+              title={'Loading'}
               titleColor={THEME_COLOR}
               colors={[THEME_COLOR]}
               refreshing={store.isLoading}
@@ -142,10 +137,9 @@ class PopularTab extends Component {
           }
           ListFooterComponent={() => this.genIndicator()}
           onEndReached={() => {
-            console.log('---onEndReached---');
+            console.log('---onEndReached----');
             setTimeout(() => {
-              /* 滚动时候的两次调用 */
-              if (this.canLoadMore) {
+              if (this.canLoadMore) {//fix 滚动时两次调用onEndReached https://github.com/facebook/react-native/issues/14015
                 this.loadData(true);
                 this.canLoadMore = false;
               }
@@ -153,46 +147,54 @@ class PopularTab extends Component {
           }}
           onEndReachedThreshold={0.5}
           onMomentumScrollBegin={() => {
-            this.canLoadMore = true;
-            console.log('---onMomentumScrollBegin---');
+            this.canLoadMore = true; //fix 初始化时页调用onEndReached的问题
+            console.log('---onMomentumScrollBegin-----')
           }}
         />
-        <Toast ref={'toast'} position={'center'} />
+        <Toast ref={'toast'}
+          position={'center'}
+        />
       </View>
     );
   }
 }
-const mapStateToProps = state => ({
-  popular: state.popular
-});
-const mapDispatchToProps = dispatch => ({
-  onRefreshPopular: (storeName, url, pageSize) => dispatch(actions.onRefreshPopular(storeName, url, pageSize)),
-  onLoadMorePopular: (storeName, pageIndex, pageSize, items, callBack) => dispatch(actions.onLoadMorePopular(storeName, pageIndex, pageSize, items, callBack))
-});
 
-const PopularTabPage = connect(mapStateToProps, mapDispatchToProps)(PopularTab)
+const mapStateToProps = state => {
+  return {
+    trending: state.trendingHansen || {}
+  }
+};
+const mapDispatchToProps = dispatch => ({
+  //将 dispatch(onRefreshPopular(storeName, url))绑定到props
+  onRefreshTrending: (storeName, url, pageSize) => dispatch(actions.onRefreshTrending(storeName, url, pageSize)),
+  onLoadMoreTrending: (storeName, pageIndex, pageSize, items, callBack) => dispatch(actions.onLoadMoreTrending(storeName, pageIndex, pageSize, items, callBack)),
+});
+//注意：connect只是个function，并不应定非要放在export后面
+const TrendingTabPage = connect(mapStateToProps, mapDispatchToProps)(TrendingTab)
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   tabStyle: {
-    minWidth: 50,
+    minWidth: 50
   },
   indicatorStyle: {
     height: 2,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   labelStyle: {
     fontSize: 13,
     marginTop: 6,
-    marginBottom: 6,
+    marginBottom: 6
+
   },
   indicatorContainer: {
-    alignItems: 'center',
+    alignItems: "center"
   },
   indicator: {
     color: 'red',
-    margin: 10,
-  },
+    margin: 10
+  }
 });
