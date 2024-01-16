@@ -10,13 +10,13 @@ import {
 import actions from '../store/action';
 import { connect } from "react-redux";
 
-class MyPage extends Component {
+class MyPage extends Component<any> {
     render() {
         return (
             <View style={styles.container}>
                 <Text>MyPage</Text>
                 <Button title='改变主题' onPress={() => {
-                    this.props.onThemeChange('#f' + Math.ceil(Math.random() * 100000));
+                    this.props.onThemeChange('#f' + `${Math.ceil(Math.random() * 100000)}`.padStart(5, '0') );
                 }} />
             </View>
         );

@@ -4,7 +4,7 @@
  */
 import Types from '../types'
 import DataStore, {FLAG_STORAGE } from '../../../expand/DataStore'
-import { handleData } from '../actionUtil'
+import { handleData, _projectModels } from '../actionUtil'
 
 /**
  * 获取最热数据的异步action
@@ -90,3 +90,27 @@ export function onLoadMorePopular(storeName: string, pageIndex: number, pageSize
 //         pageIndex: 1
 //     })
 // }
+
+/**
+ * 刷新收藏状态
+ * @param storeName
+ * @param pageIndex 第几页
+ * @param pageSize 每页展示条数
+ * @param dataArray 原始数据
+ * @param favoriteDao
+ * @returns {function(*)}
+ */
+export function onFlushPopularFavorite(storeName: string, pageIndex: number, pageSize: number, dataArray = [], favoriteDao: any) {
+    return (dispatch: any) => {
+        //本次和载入的最大数量
+        let max = pageSize * pageIndex > dataArray.length ? dataArray.length : pageSize * pageIndex;
+        _projectModels(dataArray.slice(0, max), favoriteDao, (data: any) => {
+            dispatch({
+                type: Types.FLUSH_POPULAR_FAVORITE,
+                storeName,
+                pageIndex,
+                projectModels: data,
+            })
+        })
+    }
+}

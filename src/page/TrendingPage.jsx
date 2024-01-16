@@ -7,7 +7,13 @@ import NavigationUtil from '../navigator/NavigationUtil'
 import TrendingItem from '../common/TrendingItem'
 import Toast from 'react-native-easy-toast'
 import NavigationBar from 'react-native-navbar-plus';
+import EventBus from "react-native-event-bus";
+import EventTypes from "../util/EventTypes";
 import keys from '../data/langs.json';
+import FavoriteDao from "../expand/FavoriteDao";
+import { FLAG_STORAGE } from "../expand/DataStore";
+
+const favoriteDao = new FavoriteDao(FLAG_STORAGE.flag_trending);
 
 const URL = 'https://github.com/trending/';
 const QUERY_STR = '?since=daily';
@@ -57,6 +63,14 @@ class TrendingTab extends Component {
 
   componentDidMount() {
     this.loadData();
+    EventBus.getInstance().addListener(EventTypes.favoriteChanged_trending, this.favoriteChangeListener = () => {
+      this.isFavoriteChanged = true;
+    });
+    EventBus.getInstance().addListener(EventTypes.bottom_tab_select, this.bottomTabSelectListener = (data) => {
+      if (data.to === 1 && this.isFavoriteChanged) {
+        this.loadData(null, true);
+      }
+    })
   }
 
   loadData(loadMore) {

@@ -7,6 +7,7 @@ import { StackActions } from '@react-navigation/native';
  * 全局导航跳转工具类 by CrazyCodeBoy
  */
 export default class NavigationUtil {
+    static navigation: any
     /**
      * 跳转到指定页面
      * @param {*} parmas 要传递的参数
@@ -41,7 +42,7 @@ export default class NavigationUtil {
     /**
      * 重置到登录
      */
-    static login(params : any = {}) {
+    static login(params : any) {
         const { navigation } = params;
         if (!navigation) {
             navigation = NavigationUtil.navigation;
