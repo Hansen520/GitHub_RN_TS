@@ -74,7 +74,7 @@ function MainScreen() {
           tabBarLabel: '趋势',
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={'md-trending-up'} size={26} style={{ color: color }} />
+            <Ionicons name={'accessibility-outline'} size={26} style={{ color: color }} />
           ),
         }}
       />

@@ -32,7 +32,7 @@ const TABS = {
       tabBarLabel: '趋势',
       headerShown: false,
       tabBarIcon: ({color, focused}: any) => (
-        <Ionicons name={'md-trending-up'} size={26} style={{color: color}} />
+        <Ionicons name={'accessibility-outline'} size={26} style={{color: color}} />
       ),
     },
   },
